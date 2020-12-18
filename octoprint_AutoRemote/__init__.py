@@ -158,7 +158,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
 __plugin_name__ = "OctoAutoremote"
 __plugin_implementation__ = OctoAutoremotePlugin()
-__plugin_pythoncompat__ = ">=2.7,<4"
+__plugin_pythoncompat__ = ">=3,<4"
 
 global __plugin_hooks__
 __plugin_hooks__ = {
