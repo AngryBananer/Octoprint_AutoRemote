@@ -33,19 +33,19 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
     def get_settings_defaults(self):
         return dict(autoremotekey="",
-		    autoremotesender="",
+            autoremotesender="",
                     events=dict(Startup=False
-					,Shutdown=False
-					,ClientOpened=False
-					,ClientClosed=False
-					,ConnectivityChanged=False
-					,Connecting=False
-					,Connected=False
-					,PrintStarted=False
-					,Disconnecting=False
-					,Disconnected=False
-					,Error=False
-					,PrinterStateChanged=False
+                    ,Shutdown=False
+                    ,ClientOpened=False
+                    ,ClientClosed=False
+                    ,ConnectivityChanged=False
+                    ,Connecting=False
+                    ,Connected=False
+                    ,PrintStarted=False
+                    ,Disconnecting=False
+                    ,Disconnected=False
+                    ,Error=False
+                    ,PrinterStateChanged=False
                                         ,Upload=False
                                         ,FileAdded=False
                                         ,FileRemoved=False
@@ -58,20 +58,20 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                                         ,FileDeselected=False
                                         ,TransferStarted=False
                                         ,TransferDone=False
-					,PrintFailed=False
-					,PrintCancelling=False
-					,PrintCancelled=False
-					,PrintPaused=False
-					,PrintResumed=False
-					,PrintDone=False
-					,MovieRendering=False
-					,MovieDone=False
-					,MovieFailed=False
-					,CaptureStart=False
-					,CaptureDone=False
-					,CaptureFailed=False
+                    ,PrintFailed=False
+                    ,PrintCancelling=False
+                    ,PrintCancelled=False
+                    ,PrintPaused=False
+                    ,PrintResumed=False
+                    ,PrintDone=False
+                    ,MovieRendering=False
+                    ,MovieDone=False
+                    ,MovieFailed=False
+                    ,CaptureStart=False
+                    ,CaptureDone=False
+                    ,CaptureFailed=False
                                         ,SettingsUpdated=False
-					)
+                    )
                    )
                 
             
@@ -95,7 +95,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
         if event in events and events[event]:
              messagedata = {}
              messagedata['event'] = event
-              	
+                  
              if not payload:
                  payload = {}
                  messagedata['nodata'] = 'No_Data_For_This_Event'
@@ -113,10 +113,10 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
     def _send_AutoRemote(self, message=",'nodata':'No_Data_For_This_Event'"):
         import requests
-	
+    
         autoremotekey = self._settings.get(['autoremotekey'])
         autoremotesender = self._settings.get(['autoremotesender'])
- 	
+     
         url = "https://autoremotejoaomgcd.appspot.com/sendrequest"
         messageObj = {
                  'message': message,
@@ -126,18 +126,18 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                       'type': 'Message'
                       }
         }
- 	
+     
         dataObj = {
              'key': autoremotekey,
              'sender': autoremotesender,
              'request': json.dumps(messageObj)
- 	}
- 	
- 	self._logger.info("Sending %s to URL: %s" % (dataObj, url))
- 
- 	res = requests.post(url, data=dataObj)
-        self._logger.info("Response from %s: %s" % (url, res.text))		    
-	    
+     }
+    
+    self._logger.info("Sending %s to URL: %s" % (dataObj, url))
+
+    res = requests.post(url, data=dataObj)
+        self._logger.info("Response from %s: %s" % (url, res.text))            
+        
 
     def get_update_information(self):
         return dict(
@@ -154,12 +154,11 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                 )
             )
 
-                                                                                            
 ######
-                        
+
 __plugin_name__ = "OctoAutoremote"
 __plugin_implementation__ = OctoAutoremotePlugin()
-
+__plugin_pythoncompat__ = ">=2.7,<4"
 
 global __plugin_hooks__
 __plugin_hooks__ = {
