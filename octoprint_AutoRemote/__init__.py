@@ -25,7 +25,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
         else:
 #            self.autoremotekey=''
             self._logger.info("No Autoremote Personal key set while trying to save!")
-                    
+
     def on_after_startup(self):
         self._logger.info("OctoAutoremote Plugin Active")
 #        self.autoremotekey = self._settings.get(["autoremotekey"])
@@ -73,8 +73,8 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                                         ,SettingsUpdated=False
                                         )
                    )
-                
-            
+
+
     def get_template_configs(self):
         return [ dict(type="settings", name="OctoAutoremote", custom_bindings=False) ]
 
@@ -95,7 +95,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
         if event in events and events[event]:
              messagedata = {}
              messagedata['event'] = event
-                  
+
              if not payload:
                  payload = {}
                  messagedata['nodata'] = 'No_Data_For_This_Event'
@@ -103,7 +103,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                  for data in payload:
                      messagedata[str(data).lower()] = str(payload[data]).replace("::ffff:", "")
                      self._logger.debug("forming_Message: '%s':'%s'" % (str(data).lower(), str(payload[data]).replace("::ffff:", "")))
- 
+
              message = 'OctoAutoremote=:=' + json.dumps(messagedata)
 
              self._logger.info("Calling Send: Event: %s, Message: %s" % (event, message))
@@ -113,10 +113,10 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
     def _send_AutoRemote(self, message=",'nodata':'No_Data_For_This_Event'"):
         import requests
-    
+
         autoremotekey = self._settings.get(['autoremotekey'])
         autoremotesender = self._settings.get(['autoremotesender'])
-     
+
         url = "https://autoremotejoaomgcd.appspot.com/sendrequest"
         messageObj = {
                  'message': message,
@@ -126,18 +126,17 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                       'type': 'Message'
                       }
         }
-     
+
         dataObj = {
              'key': autoremotekey,
              'sender': autoremotesender,
              'request': json.dumps(messageObj)
-     }
-    
-    self._logger.info("Sending %s to URL: %s" % (dataObj, url))
+        }
 
-    res = requests.post(url, data=dataObj)
-    self._logger.info("Response from %s: %s" % (url, res.text))            
-        
+        self._logger.info("Sending %s to URL: %s" % (dataObj, url))
+
+        res = requests.post(url, data=dataObj)
+        self._logger.info("Response from %s: %s" % (url, res.text))
 
     def get_update_information(self):
         return dict(
