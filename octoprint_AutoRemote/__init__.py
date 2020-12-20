@@ -34,6 +34,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
     def get_settings_defaults(self):
         return dict(autoremotekey="",
             autoremotesender="",
+            autoremotepassword="",
                     events=dict(Startup=False
                                         ,Shutdown=False
                                         ,ClientOpened=False
@@ -116,11 +117,13 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
         autoremotekey = self._settings.get(['autoremotekey'])
         autoremotesender = self._settings.get(['autoremotesender'])
+        autoremotesender = self._settings.get(['autoremotepassword'])
 
         url = "https://autoremotejoaomgcd.appspot.com/sendrequest"
         messageObj = {
                  'message': message,
                  'sender': autoremotesender,
+                 'password': autoremotepassword,
                  'communication_base_params': {
                       'sender': autoremotesender,
                       'type': 'Message'
@@ -130,6 +133,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
         dataObj = {
              'key': autoremotekey,
              'sender': autoremotesender,
+             'password': autoremotepassword
              'request': json.dumps(messageObj)
         }
 
