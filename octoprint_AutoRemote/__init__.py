@@ -35,17 +35,17 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
         return dict(autoremotekey="",
             autoremotesender="",
                     events=dict(Startup=False
-                    ,Shutdown=False
-                    ,ClientOpened=False
-                    ,ClientClosed=False
-                    ,ConnectivityChanged=False
-                    ,Connecting=False
-                    ,Connected=False
-                    ,PrintStarted=False
-                    ,Disconnecting=False
-                    ,Disconnected=False
-                    ,Error=False
-                    ,PrinterStateChanged=False
+                                        ,Shutdown=False
+                                        ,ClientOpened=False
+                                        ,ClientClosed=False
+                                        ,ConnectivityChanged=False
+                                        ,Connecting=False
+                                        ,Connected=False
+                                        ,PrintStarted=False
+                                        ,Disconnecting=False
+                                        ,Disconnected=False
+                                        ,Error=False
+                                        ,PrinterStateChanged=False
                                         ,Upload=False
                                         ,FileAdded=False
                                         ,FileRemoved=False
@@ -58,20 +58,20 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                                         ,FileDeselected=False
                                         ,TransferStarted=False
                                         ,TransferDone=False
-                    ,PrintFailed=False
-                    ,PrintCancelling=False
-                    ,PrintCancelled=False
-                    ,PrintPaused=False
-                    ,PrintResumed=False
-                    ,PrintDone=False
-                    ,MovieRendering=False
-                    ,MovieDone=False
-                    ,MovieFailed=False
-                    ,CaptureStart=False
-                    ,CaptureDone=False
-                    ,CaptureFailed=False
+                                        ,PrintFailed=False
+                                        ,PrintCancelling=False
+                                        ,PrintCancelled=False
+                                        ,PrintPaused=False
+                                        ,PrintResumed=False
+                                        ,PrintDone=False
+                                        ,MovieRendering=False
+                                        ,MovieDone=False
+                                        ,MovieFailed=False
+                                        ,CaptureStart=False
+                                        ,CaptureDone=False
+                                        ,CaptureFailed=False
                                         ,SettingsUpdated=False
-                    )
+                                        )
                    )
                 
             
@@ -158,7 +158,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
 __plugin_name__ = "OctoAutoremote"
 __plugin_implementation__ = OctoAutoremotePlugin()
-__plugin_pythoncompat__ = ">=3,<4"
+__plugin_pythoncompat__ = ">=2.7,<4"
 
 global __plugin_hooks__
 __plugin_hooks__ = {
