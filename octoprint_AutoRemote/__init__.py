@@ -117,7 +117,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
         autoremotekey = self._settings.get(['autoremotekey'])
         autoremotesender = self._settings.get(['autoremotesender'])
-        autoremotesender = self._settings.get(['autoremotepassword'])
+        autoremotepassword = self._settings.get(['autoremotepassword'])
 
         url = "https://autoremotejoaomgcd.appspot.com/sendrequest"
         messageObj = {
