@@ -14,20 +14,20 @@ plugin_package = "octoprint_AutoRemote"
 plugin_name = "OctoPrint_AutoRemote"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "1.5.1"
+plugin_version = "1.5.2"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
 plugin_description = """A quick Autoremote/Tasker plugin for OctoPrint"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "Craig Trunzo"
+plugin_author = "L. Kruse basend on Craig Trunzo's Plugin"
 
 # The plugin's author's mail address.
-plugin_author_email = "trunzoc@gmail.com"
+plugin_author_email = ""
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/trunzoc/Octoprint_Autoremote"
+plugin_url = "https://github.com/AngryBananer/Octoprint_Autoremote"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "AGPLv3"
