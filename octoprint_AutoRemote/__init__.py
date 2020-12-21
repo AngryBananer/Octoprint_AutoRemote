@@ -167,7 +167,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                 user="AngryBananer",
                 repo="octoprint_AutoRemote",
                 stable_branch=dict(branch="master", name="Stable"),
-                prerelease_branches=dict(branch="testing", name="Testing", committish=["testing","master"])
+                prerelease_branches=dict(branch="testing", name="Testing", committish=["testing","master"]),
                 pip="https://github.com/AngryBananer/octoprint_Autoremote/archive/{target_version}.zip"
             )
         )
