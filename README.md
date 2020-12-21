@@ -1,13 +1,15 @@
 # octoprint_AutoRemote
+Based on trunzoc's [plugin](https://github.com/trunzoc/Octoprint_AutoRemote)
 
 A simple plugin to send messages to the Android app [AutoRemote](https://play.google.com/store/apps/details?id=com.joaomgcd.autoremote) for use in [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm) by JoaoMGCD
+
 
 ## Setup
 
 Install via the bundled [Plugin Manager](http://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html)
 via this URL:
 
-    https://github.com/trunzoc/Octoprint_Autoremote/archive/master.zip
+    https://github.com/AngryBananer/Octoprint_Autoremote/archive/master.zip
 
 ## Configuration
 1. If you have not already done so, install [AutoRemote](https://play.google.com/store/apps/details?id=com.joaomgcd.autoremote) on your Android phone.
