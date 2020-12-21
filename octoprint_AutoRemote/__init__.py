@@ -133,7 +133,6 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
         dataObj = {
              'key': autoremotekey,
              'sender': autoremotesender,
-             'password': autoremotepassword,
              'request': json.dumps(messageObj)
         }
 
