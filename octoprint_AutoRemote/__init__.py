@@ -164,10 +164,11 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
                 type="github_release",
                 current=self._plugin_version,
-                user="trunzoc",
+                user="AngryBananer",
                 repo="octoprint_AutoRemote",
                 stable_branch=dict(branch="master", name="Stable"),
-                pip="https://github.com/trunzoc/octoprint_Autoremote/archive/{target_version}.zip"
+                prerelease_branches=dict(branch="testing", name="Testing", committish=["testing","master"])
+                pip="https://github.com/AngryBananer/octoprint_Autoremote/archive/{target_version}.zip"
             )
         )
 
