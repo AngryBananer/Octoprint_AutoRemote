@@ -90,7 +90,9 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 ######
 
     def on_print_progress(self, storage, path, progress):
-        if self._settings.get(['PrintProgress']) and progress % int(self._settings.get(['PrintProgressSteps'])) == 0:
+        if self._settings.get(['PrintProgress']) and \
+            progress % int(self._settings.get(['PrintProgressSteps'])) == 0 and \
+            1 <= progress <= 99:
             #self._logger.info("PrintProgress: %s" % (progress))
             payload = {}
             payload['storage'] = storage
@@ -118,7 +120,10 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
             message = 'OctoAutoremote=:=' + json.dumps(messagedata)
 
             self._logger.info("Calling Send: Event: %s, Message: %s" % (event, message))
-            self._send_AutoRemote(message)
+            try:
+                self._send_AutoRemote(message)
+            except:
+                self._logger.warning("Exception: Calling Send: Event: %s, Message: %s" % (event, message))
 #        else:
 #             self._logger.info("Event skipped: %s" % event)
 
@@ -130,6 +135,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
         autoremotepassword = self._settings.get(['autoremotepassword'])
 
         url = "https://autoremotejoaomgcd.appspot.com/sendrequest"
+
         messageObj = {
             'message': message,
             'password': autoremotepassword,
@@ -148,8 +154,14 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 
         self._logger.info("Sending %s to URL: %s" % (dataObj, url))
 
-        res = requests.post(url, data=dataObj)
-        self._logger.info("Response from %s: %s" % (url, res.text))
+        try:
+            res = requests.post(url, data=dataObj)
+        except requests.exceptions.ConnectionError as e:
+            self._logger.warning("ConnectionError %s while connecting to %s, check your connection!" % (e, url))
+        except Exception as e:
+            self._logger.warning("Error %s while: Sending %s to URL: %s" % (e, dataObj, url))
+        else:
+            self._logger.info("Response from %s: %s" % (url, res.text))
 
     def get_update_information(self):
         return dict(
@@ -159,9 +171,9 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                 type="github_release",
                 current=self._plugin_version,
                 user="AngryBananer",
-                repo="octoprint_AutoRemote",
+                repo="Octoprint_AutoRemote",
                 stable_branch=dict(branch="master", name="Stable"),
-                pip="https://github.com/AngryBananer/octoprint_Autoremote/archive/{target_version}.zip"
+                pip="https://github.com/AngryBananer/Octoprint_Autoremote/archive/{target_version}.zip"
             )
         )
 
