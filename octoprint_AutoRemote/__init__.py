@@ -18,8 +18,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
         if (hasattr, self._settings, 'autoremotekey'):
             #            self.autoremotekey = self._settings.get(["autoremotekey"])
-            self._logger.info("Saving AutoRemote personal Key: %s" %
-                              self._settings.get(["autoremotekey"]))
+            self._logger.info("Saving AutoRemote personal Key: %s" % self._settings.get(["autoremotekey"]))
         else:
             #            self.autoremotekey=''
             self._logger.info("No Autoremote Personal key set while trying to save!")
