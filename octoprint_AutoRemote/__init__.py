@@ -75,7 +75,7 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
                     )
 
     def get_template_configs(self):
-        return [dict(type="settings", name="OctoAutoremote", custom_bindings=False)]
+        return [dict(type="settings", name="AutoRemote", custom_bindings=False)]
 
     def get_assets(self):
         return dict(
@@ -127,40 +127,47 @@ class OctoAutoremotePlugin(octoprint.plugin.StartupPlugin,
 #             self._logger.info("Event skipped: %s" % event)
 
     def _send_AutoRemote(self, message=",'nodata':'No_Data_For_This_Event'"):
-        import requests
+        if self._settings.get(['autoremotekey']):
 
-        autoremotekey = self._settings.get(['autoremotekey'])
-        autoremotesender = self._settings.get(['autoremotesender'])
-        autoremotepassword = self._settings.get(['autoremotepassword'])
+            import requests
 
-        url = "https://autoremotejoaomgcd.appspot.com/sendrequest"
+            autoremotekey = self._settings.get(['autoremotekey'])
+            autoremotesender = self._settings.get(['autoremotesender'])
+            autoremotepassword = self._settings.get(['autoremotepassword'])
 
-        messageObj = {
-            'message': message,
-            'password': autoremotepassword,
-            'sender': autoremotesender,
-            'communication_base_params': {
+            url = "https://autoremotejoaomgcd.appspot.com/sendrequest"
+
+            messageObj = {
+                'message': message,
+                'password': autoremotepassword,
                 'sender': autoremotesender,
-                'type': 'Message'
+                'communication_base_params': {
+                    'sender': autoremotesender,
+                    'type': 'Message'
+                }
             }
-        }
 
-        dataObj = {
-            'key': autoremotekey,
-            'sender': autoremotesender,
-            'request': json.dumps(messageObj)
-        }
+            dataObj = {
+                'key': autoremotekey,
+                'sender': autoremotesender,
+                'request': json.dumps(messageObj)
+            }
 
-        self._logger.info("Sending %s to URL: %s" % (dataObj, url))
+            self._logger.info("Sending %s to URL: %s" % (dataObj, url))
 
-        try:
-            res = requests.post(url, data=dataObj)
-        except requests.exceptions.ConnectionError as e:
-            self._logger.warning("ConnectionError %s while connecting to %s, check your connection!" % (e, url))
-        except Exception as e:
-            self._logger.warning("Error %s while: Sending %s to URL: %s" % (e, dataObj, url))
+            try:
+                res = requests.post(url, data=dataObj)
+            except requests.exceptions.ConnectionError as e:
+                self._logger.warning("ConnectionError %s while connecting to %s, check your connection!" % (e, url))
+            except Exception as e:
+                self._logger.warning("Error %s while: Sending %s to URL: %s" % (e, dataObj, url))
+            else:
+                if res.text == "OK":
+                    self._logger.info("Response from %s: %s" % (url, res.text))
+                else:
+                    self._logger.warning("Response from %s: %s" % (url, res.text))
         else:
-            self._logger.info("Response from %s: %s" % (url, res.text))
+            self._logger.info("Your AutoRemote key is empty!")
 
     def get_update_information(self):
         return dict(
